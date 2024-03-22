@@ -15,6 +15,8 @@ import { CoffeesService } from './coffees.service';
 
 @Controller('coffees')
 export class CoffeesController {
+  // "private" is a TypeScript access modifier
+  // Shorthand to declare and initialize the CoffeeService available only to this class
   constructor(private readonly coffeeService: CoffeesService) {}
 
   @Get('flavors')
