@@ -16,15 +16,16 @@ export class CoffeesController {
 
   @Get('flavors')
   findAll(@Query() paginationQuery) {
-    const { limit, offset } = paginationQuery;
+    // const { limit, offset } = paginationQuery;
 
-    return `This action returns all coffees. Limit: ${limit}, offset: ${offset}`;
+    // return `This action returns all coffees. Limit: ${limit}, offset: ${offset}`;
+    return this.coffeeService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     // return `This action returns ${id} coffee.`;
-    this.coffeeService.findOne(id);
+    return this.coffeeService.findOne(id);
   }
 
   @Post()
