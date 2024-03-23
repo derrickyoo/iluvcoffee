@@ -6,6 +6,9 @@ export class Event {
   id: number;
 
   @Column()
+  name: string;
+
+  @Column()
   type: string;
 
   @Column('json')
