@@ -30,9 +30,10 @@ export class CoffeesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: number) {
     // return `This action returns ${id} coffee.`;
-    const coffee = this.coffeeService.findOne(id);
+    console.log(typeof id);
+    const coffee = this.coffeeService.findOne('' + id);
 
     if (!coffee) {
       // throw new HttpException(`Coffee ${id} not found`, HttpStatus.NOT_FOUND);
@@ -45,6 +46,8 @@ export class CoffeesController {
   @Post()
   create(@Body() createCoffeDto: CreateCoffeeDto) {
     // return body;
+
+    console.log(createCoffeDto instanceof CreateCoffeeDto);
     this.coffeeService.create(createCoffeDto);
   }
 
