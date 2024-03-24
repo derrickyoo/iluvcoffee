@@ -16,5 +16,11 @@ import { Flavor } from './entities/flavor.entity';
   imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
   // Services that need to be instantiated by the NestJS injector (can also be added to exports if you want to expose them to other modules that consume this module)
   providers: [CoffeesService],
+  // providers: [
+  //   {
+  //     provide: CoffeesService,  // token
+  //     useClass: CoffeesService, // class
+  //   },
+  // ],
 })
 export class CoffeesModule {}
