@@ -32,6 +32,9 @@ export class CoffeesService {
     // The configService is helpful in setting defaults in our application in situations where some environments may not pass all key/values we need
     const databaseHost = this.configService.get('database.host', 'localhost'); // fall back to 'localhost'
     console.log(databaseHost);
+
+    const coffeesConfig = this.configService.get('coffees');
+    console.log(coffeesConfig);
   }
 
   findAll(paginationQueryDto: PaginationQueryDto) {
