@@ -30,10 +30,7 @@ export class CoffeesService {
   ) {
     // Every .env variable is a string by default
     // The configService is helpful in setting defaults in our application in situations where some environments may not pass all key/values we need
-    const databaseHost = this.configService.get<string>(
-      'DATABASE_HOST',
-      'localhost',
-    ); // fall back to 'localhost'
+    const databaseHost = this.configService.get('database.host', 'localhost'); // fall back to 'localhost'
     console.log(databaseHost);
   }
 

@@ -5,11 +5,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
+import appConfig from './config/app.config';
 
 @Module({
   imports: [
     // `forRoot` is a static method that will load and parse the process.env file from the default location (project root directory)
     ConfigModule.forRoot({
+      load: [appConfig],
       validationSchema: Joi.object({
         DATABASE_HOST: Joi.required(),
         DATABASE_PORT: Joi.number().default(5432),
