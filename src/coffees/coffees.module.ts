@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Event } from 'src/events/entities/event.entity';
 import { CoffeesController } from './coffees.controller';
@@ -13,7 +14,7 @@ import { Flavor } from './entities/flavor.entity';
   // Providers that should be available anywhere this module is imported
   exports: [],
   // List other modules that this module requires
-  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
+  imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event]), ConfigModule],
   // Services that need to be instantiated by the NestJS injector (can also be added to exports if you want to expose them to other modules that consume this module)
   providers: [CoffeesService],
   // providers: [
