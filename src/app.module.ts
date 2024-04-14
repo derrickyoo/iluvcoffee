@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
+import { CommonModule } from './common/common.module';
 import appConfig from './config/app.config';
 
 @Module({
@@ -30,6 +31,7 @@ import appConfig from './config/app.config';
         synchronize: true, // ensures TypeORM entites are synced with the DB everytime we run our application (disable this in production)
       }),
     }),
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
