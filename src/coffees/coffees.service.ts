@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService, ConfigType } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Event } from 'src/events/entities/event.entity';
 import { DataSource, Repository } from 'typeorm';
@@ -8,6 +8,7 @@ import { CreateCoffeeDto } from './dto/create-coffee.dto';
 import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
+import coffeesConfig from './config/coffees.config';
 
 @Injectable()
 export class CoffeesService {
@@ -26,15 +27,19 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
     private readonly dataSource: DataSource,
-    private readonly configService: ConfigService,
+    // 🚨 private readonly configService: ConfigService,
+    // ✅ Inject the entire namespace configuration object directly for type safety and better ability to test
+    @Inject(coffeesConfig.KEY) // Each namespace exposes a KEY property
+    private readonly coffeesConfiguration: ConfigType<typeof coffeesConfig>, // ConfigType infers type safety
   ) {
-    // Every .env variable is a string by default
+    // 🚨 Every .env variable is a string by default
     // The configService is helpful in setting defaults in our application in situations where some environments may not pass all key/values we need
-    const databaseHost = this.configService.get('database.host', 'localhost'); // fall back to 'localhost'
-    console.log(databaseHost);
-
-    const coffeesConfig = this.configService.get('coffees');
-    console.log(coffeesConfig);
+    // const databaseHost = this.configService.get('database.host', 'localhost'); // fall back to 'localhost'
+    // console.log(databaseHost);
+    // const coffeesConfig = this.configService.get('coffees');
+    // console.log(coffeesConfig);
+    // ✅ Access object directly instead of using the get method
+    console.log(coffeesConfiguration.foo);
   }
 
   findAll(paginationQueryDto: PaginationQueryDto) {
