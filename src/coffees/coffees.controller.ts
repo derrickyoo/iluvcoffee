@@ -10,6 +10,7 @@ import {
   Patch,
   Post,
   Query,
+  SetMetadata,
 } from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
@@ -22,6 +23,7 @@ export class CoffeesController {
   // Shorthand to declare and initialize the CoffeeService available only to this class
   constructor(private readonly coffeeService: CoffeesService) {}
 
+  @SetMetadata('isPublic', true)
   @Get('flavors')
   findAll(@Query() paginationQuery: PaginationQueryDto) {
     // const { limit, offset } = paginationQuery;
